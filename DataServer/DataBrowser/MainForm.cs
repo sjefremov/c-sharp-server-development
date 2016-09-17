@@ -91,5 +91,54 @@ namespace DataBrowser
             base.Dispose(disposing);
         }
 
+        private async void lbxTables_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var databaseName = (string)cbxDatabases.SelectedItem;
+            var tableName = (string)lbxTables.SelectedItem;
+
+            var dataColumns = connection.GetSchema("Columns", new string[] { null, null, tableName });//look at the documentation for the meaning of these values
+
+            var columnNames = new List<string>();
+            foreach (DataRow table in dataColumns.Rows)
+            {
+                columnNames.Add(table.Field<string>("COLUMN_NAME"));
+            }
+
+            dgvData.Columns.Clear();
+
+            foreach (var cname in columnNames)
+            {
+                dgvData.Columns.Add(cname, cname);
+            }
+
+            using (var command = new SqlCommand())
+            {
+                command.Connection = connection;
+                command.CommandText = $"select top 10 * from {tableName}";
+
+                //old
+
+                //var result = command.BeginExecuteReader();
+                //MessageBox.Show("started");
+                //using (var dataReader = command.EndExecuteReader(result))
+                //{
+                //    MessageBox.Show("done");
+                //}
+
+                //new
+
+                using (var dataReader = await command.ExecuteReaderAsync())
+                {
+                    while (dataReader.Read())
+                    {
+                        var values = new object[dataReader.FieldCount];
+                        dataReader.GetValues(values);
+                        dgvData.Rows.Add(values);
+                    }
+                    
+                }
+                
+            }
+        }
     }
 }

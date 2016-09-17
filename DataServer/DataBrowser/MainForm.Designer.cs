@@ -18,13 +18,15 @@
             this.btnConnect = new System.Windows.Forms.Button();
             this.cbxDatabases = new System.Windows.Forms.ComboBox();
             this.lbxTables = new System.Windows.Forms.ListBox();
+            this.dgvData = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
             // btnConnect
             // 
             this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnect.Location = new System.Drawing.Point(477, 21);
+            this.btnConnect.Location = new System.Drawing.Point(1034, 21);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(135, 54);
             this.btnConnect.TabIndex = 0;
@@ -48,20 +50,31 @@
             this.lbxTables.FormattingEnabled = true;
             this.lbxTables.Location = new System.Drawing.Point(12, 48);
             this.lbxTables.Name = "lbxTables";
-            this.lbxTables.Size = new System.Drawing.Size(207, 316);
+            this.lbxTables.Size = new System.Drawing.Size(207, 472);
             this.lbxTables.TabIndex = 2;
+            this.lbxTables.SelectedIndexChanged += new System.EventHandler(this.lbxTables_SelectedIndexChanged);
+            // 
+            // dgvData
+            // 
+            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvData.Location = new System.Drawing.Point(225, 101);
+            this.dgvData.Name = "dgvData";
+            this.dgvData.Size = new System.Drawing.Size(978, 430);
+            this.dgvData.TabIndex = 3;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 372);
+            this.ClientSize = new System.Drawing.Size(1202, 531);
+            this.Controls.Add(this.dgvData);
             this.Controls.Add(this.lbxTables);
             this.Controls.Add(this.cbxDatabases);
             this.Controls.Add(this.btnConnect);
             this.Name = "frmMain";
             this.Text = "SEDC Data Browser - not connected";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -71,6 +84,7 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.ComboBox cbxDatabases;
         private System.Windows.Forms.ListBox lbxTables;
+        private System.Windows.Forms.DataGridView dgvData;
     }
 }
 
